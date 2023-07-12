@@ -4,13 +4,31 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { useRoutes } from 'react-router-dom';
 import { ShowCreators } from './pages/ShowCreators';
-import { ViewCreators } from './pages/ViewCreators';
+import { ViewCreator } from './pages/ViewCreator';
 import { AddCreator } from './pages/AddCreator';
 import { EditCreator } from './pages/EditCreator';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  let element = useRoutes([
+    {
+      path: '/',
+      element: <ShowCreators />
+    },
+    {
+      path: 'view-creator',
+      element: <ViewCreator />
+    },
+    {
+      path: 'edit-creator',
+      element: <EditCreator />
+    },
+    {
+      path: 'new-creator',
+      element: <AddCreator />
+    }
+  ])
 
   return (
     <>
