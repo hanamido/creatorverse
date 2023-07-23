@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { useRoutes, useNavigate, useParams } from 'react-router-dom';
+import './App.css';
+import { useRoutes, useNavigate, Link } from 'react-router-dom';
 import ShowCreators from './pages/ShowCreators';
 import ViewCreator from './pages/ViewCreator';
 import AddCreator from './pages/AddCreator';
 import EditCreator from './pages/EditCreator';
 import { supabase } from '../client';
 import '@picocss/pico';
+import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   const [creators, setCreators] = useState([]);
@@ -16,19 +15,17 @@ function App() {
   const [creatorToEdit, setCreatorToEdit] = useState('');
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const ref = useRef();
+  const ref = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: contentCreators, error} = await supabase
+        const { data: creators, error} = await supabase
           .from('creators')
           .select('*')
-          .order('id', {ascending: true});
-        {
-          setCreators(contentCreators);
+          .order('created_at', {ascending: true});
+          setCreators(creators);
           setLoading(false);
-        }
       } catch (error) {
         setLoading(false);
         console.error('Error fetching data: ', error);
@@ -44,8 +41,16 @@ function App() {
 
   const handleEditCreator = (creator) => {
     setCreatorToEdit(creator);
-    navigate(`/edit/${creator.id}`)
+    navigate(`/edit/${creator.id}`);
   }
+
+  const handleScroll = (ref) => {
+    window.scrollTo({
+      top: ref.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   const routes = useRoutes([
     {
@@ -54,7 +59,8 @@ function App() {
         contentCreators={creators} 
         isLoading={isLoading} 
         handleCurrentCreator={(currentCreator) => handleCurrentCreator(currentCreator)} 
-        handleEditCreator={(creatorToEdit) => handleEditCreator(creatorToEdit)} />
+        handleEditCreator={(creatorToEdit) => handleEditCreator(creatorToEdit)}
+        refToScroll={ref} />
     },
     {
       path: '/:id',
@@ -75,21 +81,21 @@ function App() {
   return (
     <div>
       <header className="header">
-      <h1 className="title-text">Creatorverse</h1>
+      <h1 className="title-text" style={{marginBottom: 0}}>Creatorverse</h1>
       <nav id="navbar">
         <ul>
-          <li><a href="/" role="button">View All Creators</a></li>
-          <li><a href="new" role="button">Add Creator</a></li>
+          <li><Link to="/" role="button" onClick={() => {
+            handleScroll(ref.current)
+          }}>View All Creators</Link></li>
+          <li><Link to="new" role="button" onClick={() => {
+            handleScroll(ref.current)
+          }}>Add Creator</Link></li>
         </ul>
       </nav>
       </header>
       {routes}
     </div>
   )
-    // <>
-    //   <ContentCreatorCard contentCreator={creator} />
-    //   <ShowCreators contentCreators={creators} />
-    // </>
 }
 
 export default App

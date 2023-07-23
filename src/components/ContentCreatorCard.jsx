@@ -1,9 +1,11 @@
 import React from "react";
-import { HiOutlineInformationCircle } from 'react-icons/hi';
-import { FiEdit2 } from 'react-icons/fi';
+import { AiTwotoneEdit, AiFillYoutube, AiFillInstagram, AiOutlineTwitter } from 'react-icons/ai';
+import { IoInformationCircle } from 'react-icons/io5';
+import { Link } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 // Component to contain a creator's info
 
-function ContentCreatorCard({ contentCreator, handleCurrentCreator, handleEditCreator}) {
+function ContentCreatorCard({ contentCreator, handleCurrentCreator, handleEditCreator }) {
     // console.log(contentCreator.imageUrl);
 
     const handleViewCreatorClick = () => {
@@ -25,12 +27,32 @@ function ContentCreatorCard({ contentCreator, handleCurrentCreator, handleEditCr
                 </div>
                 <div className="content-creator-card-details">
                     <b>{contentCreator.name}</b> <br />
-                    <HiOutlineInformationCircle onClick={handleViewCreatorClick} /> &nbsp; 
-                    <FiEdit2 onClick={handleEditCreatorClick} />
+                    <Link to={'/' + contentCreator.id} data-tooltip-id="info-tooltip" data-tooltip-content="Display creator's info">
+                        <IoInformationCircle size={30} onClick={handleViewCreatorClick} />
+                        <Tooltip id="info-tooltip" />
+                    </Link> &nbsp; 
+                    <Link to={'/edit/' + contentCreator.id} data-tooltip-id="edit-tooltip" data-tooltip-content="Edit the creator's info">
+                        <AiTwotoneEdit size={30} onClick={handleEditCreatorClick} className="pointer-link" />
+                        <Tooltip id="edit-tooltip" />
+                    </Link>
                     <p className="description">{contentCreator.description}</p>
-                    <a href={contentCreator.url} target="_blank" rel="noopener noreferrer">
-                        Visit Website
-                    </a>
+                    
+                    {contentCreator.youtube !== null && contentCreator.youtube !== '' ? (
+                        <a href={'https://youtube.com/@' + contentCreator.youtube} target='__blank'>
+                            <AiFillYoutube size={30} />
+                        </a>
+                    ) : ""} &nbsp;
+                    {contentCreator.instagram !== null && contentCreator.instagram !== '' ? (
+                        <a href={'https://www.instagram.com/' + contentCreator.instagram}>
+                            <AiFillInstagram size={30} />
+                        </a>
+                    ): ""} &nbsp;
+                    {contentCreator.twitter !== null && contentCreator.twitter !== "" ? (
+                        <a href={'https://twitter.com/' + contentCreator.twitter}>
+                            <AiOutlineTwitter size={30} />
+                        </a>
+                    ): ""}
+
                 </div>
             </div>
         </>
