@@ -41,7 +41,6 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented required features:
 
 ![video walkthrough](https://github.com/hanamilktea/creatorverse/blob/main/webdev101-prework-v2.gif)
-👉🏿<img src='https://i.imgur.com/MqFWC4m.gif' title='Video Walkthrough' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  👉🏿 Kap
