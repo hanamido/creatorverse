@@ -29,26 +29,28 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ x ] The user is shown a popup modal to confirm if they would like to really delete a creator to enhance UI
+* [ x ] Once the Delete button is clicked, the user is shown a popup modal to confirm deletion, otherwise they are taken back to the main page.
 * [ x ] The user is able to add their Youtube, Twitter, or Instagram.
 * [ x ] There are informative tooltips that display what each button on each creator card allows the user to do.
+* [ x ] The user is directed back to the home page after successful creation, updating, or deleting of a creator.
+* [ x ] There are alerts notifying the user if the add/edit/delete was successful or not.
+* [ x ] When clicking on 'View All Creators' or 'Add New Creator', the app scrolls directly to that area.  
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
 
-👉🏿<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+👉🏿<img src='[https://imgur.com/MqFWC4m](https://i.imgur.com/MqFWC4m.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  👉🏿 GIF tool here
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+GIF created with ...  👉🏿 Kap
 
 ## Notes
 
 Describe any challenges encountered while building the app or any additional context you'd like to add.
+* I had some issues with manually implementing the popup modal for the user to confirm deletion, but found that there was the react-confirm-alert library that could be used for that task.
+* I also had some issues with styling of the front page to get the gradient effect, but also got that figured out eventually as well.
+* I also had some issues with keeping track of which props to pass down to which components. 
 
 ## License
 
